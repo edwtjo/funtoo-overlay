@@ -31,12 +31,11 @@ app-arch/pxz
 # any new glibc upgrade will be built against any upgraded
 # linux-headers.
 
-# For toolchain upgrade ll-2010.2:
-# glibc updated 30 Jun 2011:
->sys-libs/glibc-2.11.3
->sys-kernel/linux-headers-2.6.32
->sys-devel/gcc-4.4.5
->sys-devel/binutils-2.20.1
+# For next toolchain upgrade 
+>sys-libs/glibc-2.13-r4
+>sys-kernel/linux-headers-2.6.39
+>sys-devel/gcc-4.6.1-r1
+>sys-devel/binutils-2.21.1-r1
 
 # Oleg Vinichenko <oleg@funtoo.org> (26 Aug 2011)
 #udev-171 is now in unstable
