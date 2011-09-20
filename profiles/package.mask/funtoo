@@ -3,7 +3,7 @@
 #Daniel Robbins
 #reported incompatibility between sysrescue-std kernel and this: digitteknohippie in #funtoo
 #=sys-fs/udev-171
-#Unmasking udev-171 since older versions don't build with glibc-2.13-r4. This is a blocker
+#Unmasking udev-171 since older versions don't build with >=linux-headers-2.38. This is a blocker
 #for the next toolchain update.
 >sys-fs/udev-171
 
