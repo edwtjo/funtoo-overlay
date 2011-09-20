@@ -1,6 +1,11 @@
 # ChangeLog for sys-devel/gcc
-# Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
+# Copyright 1999-2011 Gentoo Foundation; Distributed under the GPL v2
 # $Header: /var/cvsroot/gentoo-x86/sys-devel/gcc/ChangeLog,v 1.746 2010/03/28 20:35:46 halcy0n Exp $
+
+*gcc-4.6.1-r1 (20 Sep 2011)
+
+  20 Sep 2011; Jean-Francis Roy <jeanfrancis@funtoo.org> +gcc-4.6.1-r1.ebuild:
+  Bumping to gcc-4.6.1-r1. 
 
   18 Apr 2010; Daniel Robbins <drobbins@funtoo.org> gcc-4.4.3.ebuild:
   funtoo changes for toolchain upgrade; addition of "default" USE flag,
