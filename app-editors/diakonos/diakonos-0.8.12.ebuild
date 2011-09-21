@@ -10,7 +10,7 @@ SRC_URI="http://purepistos.net/diakonos/${P}.tar.bz2"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="*"
 IUSE=""
 DEPEND=">=dev-lang/ruby-1.9"
 RDEPEND="$DEPEND"

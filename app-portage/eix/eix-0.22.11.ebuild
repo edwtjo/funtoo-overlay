@@ -12,7 +12,7 @@ SRC_URI="mirror://berlios/${PN}/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 sparc x86"
+KEYWORDS="*"
 IUSE="bzip2 debug doc hardened nls optimization strong-optimization sqlite tools zsh-completion"
 
 RDEPEND="sqlite? ( >=dev-db/sqlite-3 )
@@ -24,8 +24,9 @@ DEPEND="${RDEPEND}
 	nls? ( sys-devel/gettext )"
 
 src_prepare() {
-epatch "${FILESDIR}/${P}-disable-rsync.patch"
-} 
+	epatch "${FILESDIR}/${P}-disable-rsync.patch"
+}
+
 src_configure() {
 	econf $(use_with bzip2) $(use_with sqlite) $(use_with doc extra-doc) \
 		$(use_with zsh-completion) \

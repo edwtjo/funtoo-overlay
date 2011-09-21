@@ -1,6 +1,17 @@
 # ChangeLog for sys-libs/glibc
-# Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
+# Copyright 1999-2011 Gentoo Foundation; Distributed under the GPL v2
 # $Header: /var/cvsroot/gentoo-x86/sys-libs/glibc/ChangeLog,v 1.679 2010/02/15 06:18:04 armin76 Exp $
+
+*glibc-2.13-r4 (19 Sep 2011)
+
+  19 Sep 2011; Jean-Francis Roy <jeanfrancis@funtoo.org>
+  +files/2.12/glibc-2.12-hardened-pie.patch, +glibc-2.13-r4.ebuild,
+  +files/eblits-2.13/common.eblit, +files/eblits-2.13/pkg_postinst.eblit,
+  +files/eblits-2.13/pkg_preinst.eblit, +files/eblits-2.13/pkg_setup.eblit,
+  +files/eblits-2.13/src_compile.eblit, +files/eblits-2.13/src_install.eblit,
+  +files/eblits-2.13/src_test.eblit, +files/eblits-2.13/src_unpack.eblit:
+  Bumping glibc to 2.13-r4. The ebuild is just like Gentoo's one with Daniel's
+  modifications.
 
 *glibc-2.11.2-r2
 
