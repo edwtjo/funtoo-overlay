@@ -1,0 +1,19 @@
+
+# This patch is the only Funtoo modification to Gentoo's toolchain.eclass. It was first applied to the revision 1.440 of Gentoo's CVS.
+
+--- toolchain.eclass?revision=1.440	2011-09-20 13:58:58.151165184 -0400
++++ toolchain.eclass	2011-09-20 13:45:26.204163275 -0400
+@@ -1237,6 +1237,13 @@
+ 		hppa)
+ 			[[ ${GCCMAJOR} == "3" ]] && confgcc="${confgcc} --enable-sjlj-exceptions"
+ 			;;
++		# In the sparc64 world, the 64 bits compiler is used only to rebuild a kernel, so no libc available as a consequence, the compilation will fail at libiberty, so put --without-headers here.
++		# OpenMP is not needed in this context.
++		sparc)
++			if [[ "${PN}" == "kgcc64" ]] ; then
++				confgcc="${confgcc} --disable-libgomp --without-headers"
++			fi
++			;;
+ 	esac
+ 
+ 	GCC_LANG="c"

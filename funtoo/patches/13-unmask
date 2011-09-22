@@ -1,0 +1,18 @@
+Unmasking of Gentoo packages go there.
+Jean-Francis Roy <jeanfrancis@funtoo.org>
+
+diff --git a/profiles/package.mask/gentoo b/profiles/package.mask/gentoo
+index 71fca7e..25861ab 100644
+--- a/profiles/package.mask/gentoo
++++ b/profiles/package.mask/gentoo
+@@ -732,10 +732,6 @@ sys-kernel/usermode-sources
+ # - no SLOTting yet!
+ =dev-scheme/guile-2.0.0
+ 
+-# Ryan Hill <dirtyepic@gentoo.org> (02 Apr 2011)
+-# Masked for testing
+->=sys-devel/gcc-4.6.0
+-
+ # Samuli Suominen <ssuominen@gentoo.org> (28 Mar 2011)
+ # Masked temporarily until bug 360849 is solved so people
+ # can emerge udev.
