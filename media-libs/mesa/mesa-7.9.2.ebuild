@@ -85,9 +85,7 @@ done
 
 for card in ${RADEON_CARDS}; do
         RDEPEND="${RDEPEND}
-                video_cards_radeon? ( x11-libs/libdrm[video_cards_radeon] )
-                video_cards_r300? ( x11-libs/libdrm[video_cards_r300] )
-                video_cards_r600? ( x11-libs/libdrm[video_cards_r600] )
+		video_cards_${card}? ( x11-libs/libdrm[video_cards_${card}] )
         "
 done
 
