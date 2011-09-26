@@ -62,6 +62,7 @@ DEPEND="${RDEPEND}
 	>=sys-devel/bison-1.875
 	>=sys-devel/flex-2.5.4
 	amd64? ( multilib? ( gcj? ( app-emulation/emul-linux-x86-xlibs ) ) )
+	elibc_glibc? ( >=sys-libs/glibc-2.12 )
 	>=${CATEGORY}/binutils-2.18"
 PDEPEND=">=sys-devel/gcc-config-1.4
 	go? ( >=sys-devel/gcc-config-1.5 )"
