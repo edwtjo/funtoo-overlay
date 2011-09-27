@@ -12,14 +12,13 @@ OVZ_KERNEL="042stab037"
 OVZ_REV="1"
 OVZ_KV=${OVZ_KERNEL}.${OVZ_REV}
 KV_FULL=${PN}-${PVR}
-EXTRAVERSION=-${OVZ_KV}
 KERNEL_ARCHIVE="linux-${CKV}.tar.bz2"
 KERNEL_URI="mirror://kernel/linux/kernel/v${KV_MAJOR}.${KV_MINOR}/${KERNEL_ARCHIVE}"
 RESTRICT="binchecks strip"
 
 LICENSE="GPL-2"
 KEYWORDS="x86 amd64"
-IUSE="binary"
+IUSE="binary custom"
 DEPEND="binary? ( >=sys-kernel/genkernel-3.4.12.6-r4 )"
 RDEPEND="binary? ( >=sys-fs/udev-160 )"
 DESCRIPTION="Full Linux kernel sources - RHEL5 kernel with OpenVZ patchset"
@@ -78,19 +77,44 @@ apply() {
 }
 
 pkg_setup() {
-	case $ARCH in
-		x86)
-			defconfig_src=i686
-			;;
-		amd64)
-			defconfig_src=x86_64
-			;;
-		*)
-			die "unsupported ARCH: $ARCH"
-			;;
-	esac
-	defconfig_src="${DISTDIR}/config-${CKV}-${OVZ_KV}.${defconfig_src}"
-	unset ARCH; unset LDFLAGS #will interfere with Makefile if set
+	if has "${EBUILD_PHASE:-none}" "unpack" "prepare" "compile" "install"; then
+		EXTRAVERSION=$( echo $PVR | sed -e 's:^[0-9]*\.[0-9]*\.[0-9]*::' )-$PN
+		case $ARCH in
+			x86)
+				defconfig_src=i686
+				;;
+			amd64)
+				defconfig_src=x86_64
+				;;
+			*)
+				die "unsupported ARCH: $ARCH"
+				;;
+		esac
+		defconfig_src="${DISTDIR}/config-${CKV}-${OVZ_KV}.${defconfig_src}"
+		unset ARCH; unset LDFLAGS #will interfere with Makefile if set
+		REAL_CONFIG=$defconfig_src
+		if use custom; then
+			if [ "$CUSTOM_CONFIG" = "" ]
+			then
+				die "CUSTOM_CONFIG variable is blank. Please set buildname to reference a corresponding config at in /etc/kernels/${PN}/${PVR}-[buildname]."
+			fi
+			export REAL_CONFIG=/etc/kernels/${PN}/${PVR}-$CUSTOM_CONFIG
+			if [ ! -e $defconfig_src ]
+			then
+				die "Cannot find custom config at $defconfig_src. Aborting."
+			fi
+			# now we add it tp the end of EXTRAVERSION, which will update kernel # name, module paths, etc. :)
+			EXTRAVERSION="${EXTRAVERSION}-${CUSTOM_CONFIG}"
+			echo ">>> Using Custom Configuration: $REAL_CONFIG"
+			echo ">>> EXTRAVERSION SET TO ${EXTRAVERSION}"
+			echo ">>> SLOT set to $PVR-$CUSTOM_CONFIG"
+			SLOT=$PVR-$CUSTOM_CONFIG
+		fi
+	fi
+}
+
+pre_src_unpack() {
+	pkg_setup
 }
 
 src_prepare() {
@@ -109,16 +133,16 @@ src_prepare() {
 }
 
 src_compile() {
+	[ "$REAL_CONFIG" = "" ] && die "REAL_CONFIG not set - exiting."
 	! use binary && return
 	install -d ${WORKDIR}/out/{lib,boot}
 	install -d ${T}/{cache,twork}
 	install -d $WORKDIR/build $WORKDIR/out/lib/firmware
-	DEFAULT_KERNEL_SOURCE="${S}" INSTALL_FW_PATH=${WORKDIR}/out/lib/firmware CMD_KERNEL_DIR="${S}" genkernel ${GKARGS} \
+	genkernel ${GKARGS} \
 		--no-save-config \
-		--kernel-config="$defconfig_src" \
-		--kernname="${PN}" \
+		--kernel-config="$REAL_CONFIG" \
+		--extraversion="${EXTRAVERSION}" \
 		--build-src="$S" \
-		--build-dst=${WORKDIR}/build \
 		--makeopts="${MAKEOPTS}" \
 		--firmware-dst=${WORKDIR}/out/lib/firmware \
 		--cachedir="${T}/cache" \
@@ -135,31 +159,29 @@ src_compile() {
 src_install() {
 	# copy sources into place:
 	dodir /usr/src
-	cp -a ${S} ${D}/usr/src/linux-${P} || die
-	cd ${D}/usr/src/linux-${P}
-	# prepare for real-world use and 3rd-party module building:
-	make mrproper || die
-	cp $defconfig_src .config || die
-	yes "" | make oldconfig || die
-	# if we didn't use genkernel, we're done. The kernel source tree is left in
-	# an unconfigured state - you can't compile 3rd-party modules against it yet.
-	use binary || return
-	make prepare || die
-	make scripts || die
-	# OK, now the source tree is configured to allow 3rd-party modules to be
-	# built against it, since we want that to work since we have a binary kernel
-	# built.
-	cp -a ${WORKDIR}/out/* ${D}/ || die "couldn't copy output files into place"
-	# module symlink fixup:
-	rm -f ${D}/lib/modules/*/source || die
-	rm -f ${D}/lib/modules/*/build || die
-	cd ${D}/lib/modules
-	# module strip:
-	find -iname *.ko -exec strip --strip-debug {} \;
-	# back to the symlink fixup:
-	local moddir="$(ls -d 2*)"
-	ln -s /usr/src/linux-${P} ${D}/lib/modules/${moddir}/source || die
-	ln -s /usr/src/linux-${P} ${D}/lib/modules/${moddir}/build || die
+	cp -a ${S} ${D}/usr/src/linux-${PN}-${SLOT} || die
+	cd ${D}/usr/src/linux-${PN}-${SLOT}
+	if ! use binary; then
+		make mrproper || die
+		cp $REAL_CONFIG .config || die
+		yes "" | make oldconfig || die
+		# if we are just installing sources, we're done. The kernel source tree is left in
+		# an unconfigured state - you can't compile 3rd-party modules against it yet.
+	else
+		cp -a ${WORKDIR}/out/* ${D}/ || die "couldn't copy output files into place"
+		cp ${REAL_CONFIG} ${D}/boot/config-${PF} || die
+		# module symlink fixup:
+		rm -f ${D}/lib/modules/*/source || die
+		rm -f ${D}/lib/modules/*/build || die
+		cd ${D}/lib/modules
+		# module strip - consider moving this to genkernel only so we have debug
+		# symbols in our officially-installed modules:
+		find -iname *.ko -exec strip --strip-debug {} \;
+		# back to the symlink fixup:
+		local moddir="$(ls -d 2*)"
+		ln -s /usr/src/linux-${PN}-${SLOT} ${D}/lib/modules/${moddir}/source || die
+		ln -s /usr/src/linux-${PN}-${SLOT} ${D}/lib/modules/${moddir}/build || die
+	fi
 }
 
 pkg_postinst() {
@@ -168,8 +190,8 @@ pkg_postinst() {
 		echo ${K_EXTRAEINFO} | fmt |
 		while read -s ELINE; do	einfo "${ELINE}"; done
 	fi
-	if [ ! -e ${ROOT}usr/src/linux ]
+	if [ ! -h ${ROOT}usr/src/linux ] && [ ! -e ${ROOT}usr/src/linux ]
 	then
-		ln -s linux-${P} ${ROOT}usr/src/linux
+		ln -s linux-${PN}-${SLOT} ${ROOT}usr/src/linux
 	fi
 }
