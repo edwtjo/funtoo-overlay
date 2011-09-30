@@ -17,7 +17,7 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86 ~amd64 ~sparc"
+KEYWORDS="~*"
 IUSE="selinux extras +hwdb +gudev"
 MIN_KERNEL="2.6.32"
 
