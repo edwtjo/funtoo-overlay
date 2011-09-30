@@ -11,7 +11,7 @@ EXTRAVERSION=${KV_DEB}
 inherit kernel-2
 detect_version
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~*"
 DESCRIPTION="Debian Sources - with optional OpenVZ support"
 HOMEPAGE="http://www.debian.org"
 SRC_URI="
