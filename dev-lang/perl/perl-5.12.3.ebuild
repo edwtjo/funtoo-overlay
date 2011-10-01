@@ -32,14 +32,13 @@ IUSE="berkdb build debug doc gdbm ithreads"
 
 COMMON_DEPEND="berkdb? ( sys-libs/db )
 	gdbm? ( >=sys-libs/gdbm-1.8.3 )
-	>=sys-devel/libperl-5.10.1
-	!!<sys-devel/libperl-5.10.1
 	app-arch/bzip2
 	sys-libs/zlib"
 DEPEND="${COMMON_DEPEND}
 	elibc_FreeBSD? ( sys-freebsd/freebsd-mk-defs )"
 RDEPEND="${COMMON_DEPEND}"
 PDEPEND=">=app-admin/perl-cleaner-2.5"
+PROVIDE="sys-devel/libperl"
 
 S="${WORKDIR}/${MY_P}"
 
