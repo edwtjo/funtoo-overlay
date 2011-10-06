@@ -5,13 +5,17 @@ Edited by: Jean-Francis Roy <jeanfrancis@funtoo.org>
 
 
 diff --git a/profiles/default/linux/make.defaults b/profiles/default/linux/make.defaults
-index 63c3233..835cb2c 100644
+index 63c3233..5049d6d 100644
 --- a/profiles/default/linux/make.defaults
 +++ b/profiles/default/linux/make.defaults
-@@ -14,6 +14,20 @@
- # Default starting set of USE flags for all default/linux profiles.
- USE="berkdb crypt ipv6 ncurses nls pam readline ssl tcpd zlib"
+@@ -12,7 +12,22 @@
  
+ 
+ # Default starting set of USE flags for all default/linux profiles.
+-USE="berkdb crypt ipv6 ncurses nls pam readline ssl tcpd zlib"
++# Jean-Francis Roy <jeanfrancis@funtoo.org> putting back perl and python USE flags as default
++USE="berkdb crypt ipv6 ncurses nls pam perl python readline ssl tcpd zlib"
++
 +#Graphics and other formats often used in both server (cmdline) and desktop (X) applications:
 +USE="${USE} gif png jpeg tiff truetype xml"
 +
@@ -25,11 +29,10 @@ index 63c3233..835cb2c 100644
 +# Since GRP_STAGE23_USE doesn't exist anymore, I am disabling gpm in order to
 +# disable a stage3 circular issue with ncurses->gpm->ncurses.
 +USE="${USE} -gpm"
-+
+ 
  # make sure toolchain has sane defaults <tooclhain@gentoo.org>
  USE="${USE} mudflap fortran openmp"
- 
-@@ -56,7 +70,7 @@ VIDEO_CARDS="dummy fbdev v4l"
+@@ -56,7 +71,7 @@ VIDEO_CARDS="dummy fbdev v4l"
  # 2010/07/12 - Samuli Suominen <ssuominen@gentoo.org>
  # Note that adding LDFLAGS="-Wl,-O1 ${LDFLAGS}" breaks dev-util/boost-build
  # because of whitespace.
