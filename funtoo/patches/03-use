@@ -1,19 +1,16 @@
 USE vars.
 
 From: Piotr Karbowski <jabberuser@gmail.com>
+Edited by: Jean-Francis Roy <jeanfrancis@funtoo.org>
 
-
----
- profiles/default/linux/make.defaults |   16 +++++++++++++++-
- 1 files changed, 15 insertions(+), 1 deletions(-)
 
 diff --git a/profiles/default/linux/make.defaults b/profiles/default/linux/make.defaults
-index 3306b4d..9daeb62 100644
+index 63c3233..835cb2c 100644
 --- a/profiles/default/linux/make.defaults
 +++ b/profiles/default/linux/make.defaults
 @@ -14,6 +14,20 @@
  # Default starting set of USE flags for all default/linux profiles.
- USE="berkdb crypt ipv6 ncurses nls pam perl python readline ssl tcpd zlib"
+ USE="berkdb crypt ipv6 ncurses nls pam readline ssl tcpd zlib"
  
 +#Graphics and other formats often used in both server (cmdline) and desktop (X) applications:
 +USE="${USE} gif png jpeg tiff truetype xml"
