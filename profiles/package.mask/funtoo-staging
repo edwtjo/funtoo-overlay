@@ -1,8 +1,13 @@
 # PLEASE KEEP MOST RECENT MASKS ON TOP, REVERSE CHRONO ORDER
 
-# Martin Scholz (13 Oct 2011)
-# testmask for gentoo-syntax
+# Martin Scholz <golodhrim@funtoo.org> (13 Oct 2011)
+# Masked as portage 2.3.7 works with it (testmask)
 =app-vim/gentoo-syntax-20111013
+
+# Oleg Vinichenko (11 Oct 2011)
+# small update to corenetwork/openrc
+# masked for testing
+=sys-apps/openrc-0.8.3-r3 
 
 # Oleg Vinichenko (30 Sep 2011)
 # temporary mask for poppler due to multiple breakages
