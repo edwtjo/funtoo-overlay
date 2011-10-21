@@ -103,6 +103,8 @@ src_compile() {
 		--enable-introspection \
 		--enable-gudev \
 		--enable-hwdb \
+		--with-pci-ids-path="${EPREFIX}/usr/share/misc/pci.ids" \
+		--with-usb-ids-path="${EPREFIX}/usr/share/misc/usb.ids" \
 		$(use_enable gudev) \
 		$(use_enable extras) \
 		$(use_with selinux)
