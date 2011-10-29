@@ -16,6 +16,7 @@ IUSE="build doc epydoc +ipc linguas_pl python2 python3 selinux"
 GITHUB_REPO="portage-funtoo"
 GITHUB_USER="funtoo"
 GITHUB_TAG="funtoo-${PVR}"
+RESTRICT="mirror"
 
 python_dep="python3? ( =dev-lang/python-3* )
 	!python2? ( !python3? (
