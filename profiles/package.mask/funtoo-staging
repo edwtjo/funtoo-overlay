@@ -12,7 +12,6 @@
 # www-servers/nginx-1.1.7 masked for testing
 =www-servers/nginx-1.1.7
 =www-servers/nginx-1.0.9
->>>>>>> origin/master
 
 # libnl:3 mask, wireless breakage (27 Oct 2011)
 >=dev-libs/libnl-3.2.1
