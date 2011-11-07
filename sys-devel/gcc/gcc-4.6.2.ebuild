@@ -89,10 +89,8 @@ pkg_setup() {
 }
 
 pkg_postinst() {
-	if use default; then
-		gcc-config ${PV} || die "Unable to set ${P} as default."
-		einfo
-		einfo "Selected ${PV} as default compiler for ${ROOT}."
-		einfo
-	fi
+	gcc-config ${PV} || die "Unable to set ${P} as default."
+	einfo
+	einfo "Selected ${PV} as default compiler for ${ROOT}."
+	einfo
 }
