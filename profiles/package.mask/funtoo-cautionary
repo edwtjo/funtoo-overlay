@@ -28,18 +28,6 @@ app-arch/pxz
 # See bug #359445
 =net-wireless/iwl5000-ucode-8.83.5.1
 
-# Daniel Robbins <drobbins@funtoo.org> (6 Aug 2009)
-# Mask new versions for caution, and these should all
-# be tested and upgraded together. This helps ensure that
-# any new glibc upgrade will be built against any upgraded
-# linux-headers.
-
-# For next toolchain upgrade 
->sys-libs/glibc-2.13-r4
->sys-kernel/linux-headers-2.6.39
->sys-devel/gcc-4.6.1-r1
->sys-devel/binutils-2.21.1-r1
-
 # Oleg Vinichenko <oleg@funtoo.org> (26 Aug 2011)
 #udev-171 is now in unstable
 #>=sys-fs/udev-172
