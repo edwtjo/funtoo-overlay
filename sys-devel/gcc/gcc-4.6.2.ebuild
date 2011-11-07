@@ -87,3 +87,12 @@ pkg_setup() {
 	ewarn "Any bugs resulting from the use of LTO will not be fixed."
 	ewarn
 }
+
+pkg_postinst() {
+	if use default; then
+		gcc-config ${PV} || die "Unable to set ${P} as default."
+		einfo
+		einfo "Selected ${PV} as default compiler for ${ROOT}."
+		einfo
+	fi
+}
