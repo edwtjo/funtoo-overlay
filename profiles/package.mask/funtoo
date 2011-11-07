@@ -11,7 +11,7 @@
 #=sys-fs/udev-171
 #Unmasking udev-171 since older versions don't build with >=linux-headers-2.38. This is a blocker
 #for the next toolchain update.
->sys-fs/udev-171
+#>sys-fs/udev-171
 
 #Daniel Robbins (13 Jul 2011)
 #pyxml is BAD - avoid if possible - see http://permalink.gmane.org/gmane.linux.gentoo.devel/71149
