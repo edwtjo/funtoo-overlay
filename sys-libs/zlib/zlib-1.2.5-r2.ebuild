@@ -31,6 +31,8 @@ src_unpack() {
 	epatch "${FILESDIR}"/${P}-fbsd_chosts.patch
 	# This is a parallel build fix from Gentoo Bug #319661:
 	sed -i -e '/^LDFLAGS=/d' configure || die
+
+	epatch "${FILESDIR}/zlib-1.2.5-SONAME-bug-workaround.patch"
 }
 
 src_compile() {
