@@ -1,8 +1,5 @@
 # Adrien Dessemond
 # Several packages like dev-tex/luatex and are broken by app-text/poppler 0.18.0 (dev-libs/glib 2.30.0 prevents poppler 0.16.x from being built). Masked until  issues are solved => Gentoo bug #384885
-
-# Jean-Francis Roy <jeanfrancis@funtoo.org>
-# Let's keep them unmasked in the experimental branch.
 #>=app-text/poppler-0.18.0
 #>=dev-libs/glib-2.30.0
 
@@ -28,7 +25,8 @@ app-arch/pxz
 # See bug #359445
 =net-wireless/iwl5000-ucode-8.83.5.1
 
-# Oleg Vinichenko <oleg@funtoo.org> (26 Aug 2011)
-#udev-171 is now in unstable
-#>=sys-fs/udev-172
+
+# Daniel Robbins <drobbins@funtoo.org> (02 Aug 2009)
+# let's watch upstream bugs for a bit:
+#>=dev-lang/python-3
 

@@ -1,4 +1,4 @@
-# Daniel Robbins <drobbins@funtoo.org> (6 Aug 2009)
+# Jean-Francis Roy <jeanfrancis@funtoo.org> (11 Nov 2011)
 # Mask new versions for caution, and these should all
 # be tested and upgraded together. This helps ensure that
 # any new glibc upgrade will be built against any upgraded
