@@ -1,0 +1,36 @@
+From ea83e85b32e3526987562a4c9274f9da00a2e416 Mon Sep 17 00:00:00 2001
+From: Piotr Karbowski <piotr.karbowski@gmail.com>
+Date: Tue, 8 Nov 2011 21:00:16 +0100
+Subject: [PATCH] Set uname variable to linux if CHOST variable contain linux
+ string.
+
+A workaround to broken CHOST parser which intend to put a (for example) 'linux' in uname variable. Lets set uname to 'linux' if CHOST contain *linux* string otherwise revert to the original sed magic.
+---
+ configure |   11 +++++++++--
+ 1 files changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/configure b/configure
+index 93ec5cd..b94d202 100755
+--- a/configure
++++ b/configure
+@@ -14,8 +14,15 @@
+ # an error.
+ 
+ if [ -n "${CHOST}" ]; then
+-    uname="$(echo "${CHOST}" | sed -e 's/^[^-]*-\([^-]*\)$/\1/' -e 's/^[^-]*-[^-]*-\([^-]*\)$/\1/' -e 's/^[^-]*-[^-]*-\([^-]*\)-.*$/\1/')"
+-    CROSS_PREFIX="${CHOST}-"
++	case "${CHOST}" in
++		*linux*)
++			uname='linux'
++		;;
++		*)
++			uname="$(echo "${CHOST}" | sed -e 's/^[^-]*-\([^-]*\)$/\1/' -e 's/^[^-]*-[^-]*-\([^-]*\)$/\1/' -e 's/^[^-]*-[^-]*-\([^-]*\)-.*$/\1/')"
++			CROSS_PREFIX="${CHOST}-"
++		;;
++	esac
+ fi
+ 
+ STATICLIB=libz.a
+-- 
+1.7.8.rc1
+

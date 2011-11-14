@@ -1,0 +1,20 @@
+diff -Naur mplayer-1.0_rc4_p20110322/mp3lib/dct64_sse.c mplayer-1.0_rc4_p20110322.final/mp3lib/dct64_sse.c
+--- mplayer-1.0_rc4_p20110322/mp3lib/dct64_sse.c	2011-03-22 11:19:48.000000000 -0400
++++ mplayer-1.0_rc4_p20110322.final/mp3lib/dct64_sse.c	2011-10-03 22:01:01.281689372 -0400
+@@ -112,7 +112,6 @@
+     }
+ 
+     {
+-        real *costab = costab_mmx + 24;
+         int i;
+ 
+         __asm__(
+@@ -121,7 +120,7 @@
+             "movaps    %1, %%xmm5\n\t"
+             "movaps    %%xmm5, %%xmm6\n\t"
+             :
+-            :"m"(*costab), "m"(*nnnn)
++	    :"m"(costab_mmx[24]), "m"(*nnnn)
+            );
+ 
+         for (i = 0; i < 0x20; i += 8)

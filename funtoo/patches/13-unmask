@@ -2,10 +2,10 @@ Unmasking of Gentoo packages go there.
 Jean-Francis Roy <jeanfrancis@funtoo.org>
 
 diff --git a/profiles/package.mask/gentoo b/profiles/package.mask/gentoo
-index 71fca7e..25861ab 100644
+index acd1a40..f2a5fab 100644
 --- a/profiles/package.mask/gentoo
 +++ b/profiles/package.mask/gentoo
-@@ -732,10 +732,6 @@ sys-kernel/usermode-sources
+@@ -843,10 +843,6 @@ sys-kernel/usermode-sources
  # - no SLOTting yet!
  =dev-scheme/guile-2.0.0
  
@@ -15,4 +15,4 @@ index 71fca7e..25861ab 100644
 -
  # Samuli Suominen <ssuominen@gentoo.org> (28 Mar 2011)
  # Masked temporarily until bug 360849 is solved so people
- # can emerge udev.
+ # can emerge udev. Also duplicate bug 388027.
