@@ -12,7 +12,7 @@ SRC_URI="ftp://sources.redhat.com/pub/lvm2/${PN/lvm/LVM}.${PV}.tgz
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="alpha amd64 arm hppa ia64 mips ppc ppc64 s390 sh sparc x86"
 
 IUSE="rc_enable"
 
@@ -25,10 +25,8 @@ S="${WORKDIR}/${PN/lvm/LVM}.${PV}"
 src_prepare() {
 	# bug 332905
 	epatch "${FILESDIR}"/${PN}-2.02.72-dynamic-static-ldflags.patch
-
 	#cat $MYDIR/patches/lvm2-2.02.65-libdir.patch | patch -p1 || die "patch failed"
 	eautoreconf
-
 }
 
 src_configure() {
