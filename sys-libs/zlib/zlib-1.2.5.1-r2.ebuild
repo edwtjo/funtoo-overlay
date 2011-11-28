@@ -24,8 +24,6 @@ src_unpack() {
 	# +if (...) 2>/dev/null; then
 	sed -i 's|\<test "`\([^"]*\) 2>&1`" = ""|\1 2>/dev/null|' configure || die
 
-	epatch "${FILESDIR}/zlib-1.2.5.1-SONAME-bug-workaround.patch"
-
 	epatch "${FILESDIR}"/${P}-version.patch
 	epatch "${FILESDIR}"/${P}-symlinks.patch
 	EPATCH_OPTS=-p1 epatch "${FILESDIR}"/${PN}-1.2.4-minizip-autotools.patch
