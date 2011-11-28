@@ -34,12 +34,22 @@ PATCHES=(
 )
 
 pkg_setup() {
+	local radeonconf
+
+	if use radeon; then
+		radeonconf="${radeonconf} --enable-radeon"
+	elif use r300; then
+		radeonconf="${radeonconf} --enable-radeon"
+	elif use r600; then
+		radeonconf="${radeonconf} --enable-radeon"
+	else
+		radeonconf="${radeonconf}"
+	fi
+
 	CONFIGURE_OPTIONS="--enable-udev
 		$(use_enable video_cards_intel intel)
 		$(use_enable video_cards_nouveau nouveau-experimental-api)
-		$(use_enable video_cards_radeon radeon)
-		$(use_enable video_cards_r300 radeon)
-		$(use_enable video_cards_r600 radeon)
+		${radeonconf}
 		$(use_enable video_cards_vmware vmwgfx-experimental-api)
 		$(use_enable libkms)"
 
