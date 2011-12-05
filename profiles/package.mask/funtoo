@@ -6,13 +6,6 @@
 =media-libs/mesa-9999
 =x11-libs/libdrm-9999
 
-#Daniel Robbins
-#reported incompatibility between sysrescue-std kernel and this: digitteknohippie in #funtoo
-#=sys-fs/udev-171
-#Unmasking udev-171 since older versions don't build with >=linux-headers-2.38. This is a blocker
-#for the next toolchain update.
-#>sys-fs/udev-171
-
 #Daniel Robbins (13 Jul 2011)
 #pyxml is BAD - avoid if possible - see http://permalink.gmane.org/gmane.linux.gentoo.devel/71149
 dev-python/pyxml
