@@ -1,5 +1,9 @@
 # PLEASE KEEP MOST RECENT MASKS ON TOP, REVERSE CHRONO ORDER
 
+# Martin Scholz (08 Dec 2011)
+# testing mask for nginx 1.1.10
+=www-servers/nginx-1.1.10
+
 # Oleg Vinichenko (30 Sep 2011)
 # temporary mask for poppler due to multiple breakages
 #>=app-text/poppler-0.18.0
