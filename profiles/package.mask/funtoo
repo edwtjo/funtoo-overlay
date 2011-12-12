@@ -1,11 +1,5 @@
 # PLEASE KEEP MOST RECENT MASKS ON TOP, REVERSE CHRONO ORDER
 
-#Jean-Francis Roy <jeanfrancis@funtoo.org>
-#Adding masks for -9999 versions of mesa-related packages from Mathieu Bélanger
-=x11-drivers/xf86-video-ati-9999
-=media-libs/mesa-9999
-=x11-libs/libdrm-9999
-
 #Daniel Robbins (13 Jul 2011)
 #pyxml is BAD - avoid if possible - see http://permalink.gmane.org/gmane.linux.gentoo.devel/71149
 dev-python/pyxml
